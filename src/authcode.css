@@ -1,0 +1,27 @@
+body {
+    margin: 0; /* Reset default body margin */
+    padding: 0; /* Reset default body padding */
+    background: url("../public/authBG.jpg");
+    background-size: cover; /* Cover the entire background area */
+    background-position: center; /* Center the background image */
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.auth_container{
+    margin: auto;
+  width: 30%;
+  text-align: center;
+  padding: 10px;
+  margin-top: 20%;
+  height: 30%;
+
+  /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+}
+

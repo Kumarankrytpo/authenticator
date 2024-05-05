@@ -2,6 +2,7 @@ import './App.css'
 import React, { useState} from 'react';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 
 function Login() {
@@ -13,6 +14,7 @@ function Login() {
   const[inputStyleClas,setinputStyleClas] = useState("");
   const[username,setLoginUserName] = useState("");
   const[password,setLoginPassword] = useState("");
+  const navigation = useNavigate();
 
   const validateLogin = () =>{
     let rtnflag=true;
@@ -37,16 +39,22 @@ function Login() {
             password : password
           }),
         }).then((response) => {
-          console.log("FIRST RESP >>>"+response);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
           return response.json();
         }).then((data) => {
-          console.log("response>>>"+data);
-          if(data.status!== undefined && data.status==="success"){
-            console.log(":inside account not exsist");
+          const respData = JSON.parse(JSON.stringify(data));
+          console.log("status chec "+JSON.stringify(respData));
+          if(respData.check!== undefined && respData.check==="success"){
+            console.log("login successful"+respData.emailid+"   "+respData.userid);
             toast.success('Login Successful');
+            navigation("/authcode",{
+              state : {
+                emailid : respData.emailid,
+                userid : respData.userid
+              }
+            });
           }else{
             console.log(":inside account not exsist");
             toast.error('Account Not Exists.');
